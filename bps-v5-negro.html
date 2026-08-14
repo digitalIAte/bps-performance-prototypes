@@ -223,25 +223,33 @@ section{padding:clamp(3.2rem,7vw,5.5rem) 0;}
 .kit-acc-media{position:relative;aspect-ratio:4/5;overflow:hidden;perspective:1400px;}
 .kit3d-scene{position:relative;width:100%;height:100%;transform-style:preserve-3d;}
 
-.kit3d-box{position:absolute;top:50%;left:50%;width:min(220px,52vw);transform:translate(-50%,-50%);animation:kit3d-idle 7s ease-in-out infinite;z-index:4;}
-.kit3d-box img{width:100%;display:block;filter:contrast(1.14) saturate(0.8) brightness(0.96);box-shadow:0 40px 70px rgba(0,0,0,0.6);transition:opacity .5s ease,filter .5s ease;}
-.kit3d-box.receded{animation:none;transform:translate(-63%,-50%) translateZ(-70px) rotateY(-14deg) scale(0.82);transition:transform .8s cubic-bezier(.16,1,.3,1);}
-.kit3d-box.receded img{filter:contrast(1.14) saturate(0.8) brightness(0.7);}
-@keyframes kit3d-idle{0%,100%{transform:translate(-50%,-50%) rotateY(-5deg);}50%{transform:translate(-50%,-50%) rotateY(5deg);}}
+.kit3d-box{position:absolute;top:50%;left:50%;width:min(200px,46vw);transform:translate(-50%,-50%);z-index:4;transition:transform 1s cubic-bezier(.16,1,.3,1);}
+.kit3d-box img{width:100%;display:block;filter:contrast(1.14) saturate(0.8) brightness(0.96);box-shadow:0 40px 70px rgba(0,0,0,0.6);transition:filter .6s ease;}
+.kit3d-scene.open .kit3d-box{animation:kit3d-idle 7s ease-in-out .9s infinite;transform:translate(-50%,-50%) translateZ(-30px) rotateX(8deg) scale(.88);}
+.kit3d-scene.open .kit3d-box img{filter:contrast(1.14) saturate(0.8) brightness(0.75);}
+@keyframes kit3d-idle{0%,100%{transform:translate(-50%,-50%) translateZ(-30px) rotateX(8deg) rotateY(-4deg) scale(.88);}50%{transform:translate(-50%,-50%) translateZ(-30px) rotateX(8deg) rotateY(4deg) scale(.88);}}
 
-.kit3d-part{position:absolute;top:50%;left:50%;width:min(150px,34vw);text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,-50%) translateZ(-40px) scale(.5);transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s ease;z-index:2;}
-.kit3d-part img{width:100%;aspect-ratio:1;object-fit:cover;filter:contrast(1.14) saturate(0.8) brightness(0.96);box-shadow:0 26px 50px rgba(0,0,0,0.55);}
-.kit3d-part span{display:block;margin-top:0.6rem;font-family:var(--font-mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
-.kit3d-part.exploded{opacity:1;transform:translate(18%,-50%) translateZ(160px) rotateY(-16deg) scale(1.1);z-index:5;transition-delay:.15s;}
+.kit3d-part{position:absolute;top:50%;left:50%;width:min(118px,26vw);text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,-50%) translateZ(-50px) scale(.4);transition:transform 1s cubic-bezier(.16,1,.3,1),opacity .5s ease;z-index:2;}
+.kit3d-part img{width:100%;aspect-ratio:1;object-fit:cover;filter:contrast(1.14) saturate(0.8) brightness(0.96);box-shadow:0 24px 46px rgba(0,0,0,0.55);transition:box-shadow .3s ease;}
+.kit3d-part span{display:block;margin-top:0.55rem;font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
+.kit3d-scene.open .kit3d-part{opacity:1;pointer-events:auto;}
+.kit3d-scene.open .kit3d-part[data-item="1"]{transform:translate(calc(-50% - 128px),calc(-50% - 88px)) translateZ(110px) rotateY(15deg) scale(1);transition-delay:.15s;}
+.kit3d-scene.open .kit3d-part[data-item="2"]{transform:translate(calc(-50% + 128px),calc(-50% - 88px)) translateZ(150px) rotateY(-15deg) scale(1);transition-delay:.3s;}
+.kit3d-scene.open .kit3d-part[data-item="3"]{transform:translate(calc(-50% - 128px),calc(-50% + 96px)) translateZ(90px) rotateY(15deg) scale(1);transition-delay:.45s;}
+.kit3d-scene.open .kit3d-part[data-item="4"]{transform:translate(calc(-50% + 128px),calc(-50% + 96px)) translateZ(130px) rotateY(-15deg) scale(1);transition-delay:.6s;}
+.kit3d-scene.open .kit3d-part.emphasized{transform:translate(-50%,-50%) translateZ(230px) rotateY(0deg) scale(1.4);transition-delay:0s;z-index:6;}
+.kit3d-part.emphasized img{box-shadow:0 30px 60px rgba(0,0,0,0.7),0 0 0 2px var(--accent);}
 @media (max-width:640px){
-  .kit3d-box.receded{transform:translate(-50%,-72%) translateZ(-40px) scale(0.66);}
-  .kit3d-part.exploded{transform:translate(-50%,42%) translateZ(120px) rotateY(0deg) scale(1);}
+  .kit3d-scene.open .kit3d-box{transform:translate(-50%,-68%) translateZ(-20px) scale(.66);}
+  .kit3d-scene.open .kit3d-part[data-item="1"]{transform:translate(calc(-50% - 78px),calc(-50% + 68px)) translateZ(70px) scale(.9);}
+  .kit3d-scene.open .kit3d-part[data-item="2"]{transform:translate(calc(-50% + 78px),calc(-50% + 68px)) translateZ(70px) scale(.9);}
+  .kit3d-scene.open .kit3d-part[data-item="3"]{transform:translate(calc(-50% - 78px),calc(-50% + 156px)) translateZ(70px) scale(.9);}
+  .kit3d-scene.open .kit3d-part[data-item="4"]{transform:translate(calc(-50% + 78px),calc(-50% + 156px)) translateZ(70px) scale(.9);}
+  .kit3d-scene.open .kit3d-part.emphasized{transform:translate(-50%,-50%) translateZ(180px) scale(1.15);}
 }
 @media (prefers-reduced-motion:reduce){
-  .kit3d-box{animation:none;}
-  .kit3d-box.receded,.kit3d-part{transition:opacity .4s ease;}
-  .kit3d-box.receded{transform:translate(-63%,-50%) scale(0.82);}
-  .kit3d-part.exploded{transform:translate(18%,-50%) scale(1.1);}
+  .kit3d-box,.kit3d-part{transition:opacity .4s ease;}
+  .kit3d-scene.open .kit3d-box{animation:none;}
 }
 .kit-acc-item{border-top:1px solid var(--hairline);}
 .kit-acc-item:last-child{border-bottom:1px solid var(--hairline);}
@@ -679,11 +687,21 @@ footer{border-top:1px solid var(--hairline);}
     editorialRows.forEach(function(row){ erio.observe(row); });
   }
 
-  // Kit accordion: opens the 3D box and flies the selected part out toward the viewer
+  // Kit 3D scene: box opens and all parts explode outward automatically once scrolled into view
+  var kit3dScene = document.getElementById('kit3dScene');
+  if (kit3dScene && 'IntersectionObserver' in window) {
+    var kio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { kit3dScene.classList.add('open'); kio.unobserve(e.target); } });
+    }, {threshold:0.3});
+    kio.observe(kit3dScene);
+  } else if (kit3dScene) {
+    kit3dScene.classList.add('open');
+  }
+
+  // Kit accordion: clicking a component emphasizes its exploded part
   var kitAcc = document.getElementById('kit');
   if (kitAcc) {
     var kitItems = kitAcc.querySelectorAll('.kit-acc-item');
-    var kit3dBox = kitAcc.querySelector('.kit3d-box');
     var kit3dParts = kitAcc.querySelectorAll('.kit3d-part');
     kitItems.forEach(function(item){
       var head = item.querySelector('.kit-acc-head');
@@ -693,8 +711,7 @@ footer{border-top:1px solid var(--hairline);}
         item.classList.add('active');
         head.setAttribute('aria-expanded','true');
         var idx = item.dataset.item;
-        if (kit3dBox) kit3dBox.classList.toggle('receded', idx !== '0');
-        kit3dParts.forEach(function(p){ p.classList.toggle('exploded', p.dataset.item === idx); });
+        kit3dParts.forEach(function(p){ p.classList.toggle('emphasized', p.dataset.item === idx); });
       });
     });
   }
